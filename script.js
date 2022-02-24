@@ -22,9 +22,17 @@
 	var hits = [];
 	var songResultCardEl = ""
 
+	$(searchEl).keyup(function (event) {
+		if (event.which == 13){
+			event.preventDefault();
+			$(submitBtnEl).click();
+		}else{
+			return
+		}
+	})
 
 	$('.btn').click(function () {
-		// preventDefault();
+		
 		console.log(searchEl.val());
 		clearSongResultsListEl()
 

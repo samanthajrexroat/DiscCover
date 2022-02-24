@@ -1,0 +1,13 @@
+:root{
+    --bs-body-bg: #212529;
+    --bs-body-color: #0dcaf0;
+}
+
+h1{
+    size: 4rem;
+}
+
+.artistInput {
+    height: 3rem;
+    
+}

@@ -5,44 +5,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="./assets/reset.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Document</title>
+    <link rel="stylesheet" href="./assets/style.css">
+        <title>Document</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 </head>
 
 <body>
-    <div class="container-fluid">
-        <header class=" d-flex justify-content-center bg-dark text-light p-4">
-            <h1> DISC-COVER MUSIC</h1>
+    <div class="container-fluid" id="siteHeader">
+        <header class=" d-flex justify-content-center p-4">
+            <h1 class="display-1"> DISC-COVER MUSIC</h1>
         </header>
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="userSearch">
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-                <h2>Search Artist</h2>
+                <h2 >Search Artist</h2>
             </div>
         </div>
 
-        <div class=" d-flex row">
-            <div class="d-flex col align-self-center">
-                <div class="input-group mb-3 justify-content-center">
-                    <input type="text" id="artistInput" class="artistInput" placeholder="Artist">
+        <div class=" d-flex row justify-content-center">
+            <div class="d-flex col-6">
+                <div class="input-group input-group-lg flex-column">
+                    <input type="text" class="artistInput" placeholder="Artist">
                     <button class="btn-primary btn btn-info" type="button" id="button-addon2">
                         Search
                     </button>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="artistHeader">
             <div class="col-12 d-flex justify-content-center">
                 <h2 class="artistName"></h2>
             </div>
         </div>
 
-        <div class=" d-flex row justify-content-center">
+        <div class="d-flex row justify-content-center" id="songDiv">
             <div class="d-flex row">
                 <div id="songResultsArray" class="row d-flex justify-content-center min-height-100px">
 
@@ -52,7 +53,26 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+
+    <div class="container-fluid" id="videoDiv">
+        <div class="d-flex row justify-content-center">
+            <div class="col-6 justify-content-center">
+                <iframe src="https://www.youtube.com/embed/aKydtOXW8mI"
+                        class="justify-content-center"
+                        width="560" height="315"
+                        loading="lazy"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write;
+                                encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid" id="carouselDiv">
         <div class="row justify-content-center bg-dark w-100">
             <div class="col-10 m-5">
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
