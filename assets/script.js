@@ -1,20 +1,17 @@
-var textarea = $("#textarea").val();
-var fetchUrl =
-	"https://www.googleapis.com/youtube/v3/search?q=" +
-	textarea +
-	"&key=AIzaSyDVmiKRoGL0qm1tR7KueDy-BCEOoOexHlk";
-
 //WHEN text is entered into the text area and the button is clicked...
 $("#search").click(function () {
+	var textarea = $("#textarea-input").val();
+	console.log(textarea);
+	var fetchUrl =
+		"https://www.googleapis.com/youtube/v3/search?q=" +
+		textarea +
+		"&key=AIzaSyDVmiKRoGL0qm1tR7KueDy-BCEOoOexHlk";
 	//the button grabs the value of the text area and turns it into a variable.
 	//The variable is inserted into a url string...
 	$.ajax({
 		method: "get",
 		//and an api request is made using the url string
-		url:
-			"https://www.googleapis.com/youtube/v3/search?q=" +
-			textarea +
-			"&key=AIzaSyDVmiKRoGL0qm1tR7KueDy-BCEOoOexHlk",
+		url: fetchUrl,
 	})
 		.then(function (response) {
 			console.log(fetchUrl);
@@ -27,7 +24,7 @@ $("#search").click(function () {
 		.then(function (videoId) {
 			var videoEmbedLink = "https://www.youtube.com/embed/" + videoId;
 			console.log(videoEmbedLink);
-			var embedVideo = document.createElement("iframe");
+			var embedVideo = $("<iframe>");
 			embedVideo.attr("width", "560");
 			embedVideo.attr("height", "315");
 			embedVideo.attr("src", videoEmbedLink);
@@ -39,7 +36,7 @@ $("#search").click(function () {
 			embedVideo.attr("gyroscope");
 			embedVideo.attr("picture-in-picture");
 			embedVideo.attr("allowfulscreen");
-			embedVideo.prepend($("#searchContent"));
+			embedVideo.append($("#video-player"));
 		});
 });
 
