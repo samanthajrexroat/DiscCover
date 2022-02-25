@@ -2,7 +2,7 @@
 
 // DO NOT DELETE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // 
-// API Key: 461cbd2219msh0060281615c946dp11914fjsnbde57ac7e810
+// API Key: 73d6d75d06msh06ffbbcaf1a0c6fp1b3bdfjsn8b865196affb
 // 
 // DO NOT DELETE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -101,7 +101,7 @@ $(document).on('click', '.img', function(){
 	var artistAndSong = $(this).attr("data-artistAndSong");
 	console.log(songKey);
 	console.log(artistAndSong);
-	recommendedSongs(songKey)
+	// recommendedSongs(songKey)
     }); 
 
 
@@ -111,33 +111,33 @@ console.log(songKey)
 // START SEARCH - - RECOMMENDATIONS - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // console.log(songKey)
-function recommendedSongs() {
+// function recommendedSongs() {
 
-	console.log(songKey)
+// 	console.log(songKey)
 
-	const settings = {
-		"async": true,
-		"crossDomain": true,
-		"url": "https://shazam.p.rapidapi.com/songs/list-recommendations?key=" + songKey + "&locale=en-US",
-		"method": "GET",
-		"headers": {
-			"x-rapidapi-host": "shazam.p.rapidapi.com",
-			"x-rapidapi-key": "73d6d75d06msh06ffbbcaf1a0c6fp1b3bdfjsn8b865196affb"
-		}
-	}
+// 	const settings = {
+// 		"async": true,
+// 		"crossDomain": true,
+// 		"url": "https://shazam.p.rapidapi.com/songs/list-recommendations?key=" + songKey + "&locale=en-US",
+// 		"method": "GET",
+// 		"headers": {
+// 			"x-rapidapi-host": "shazam.p.rapidapi.com",
+// 			"x-rapidapi-key": "73d6d75d06msh06ffbbcaf1a0c6fp1b3bdfjsn8b865196affb"
+// 		}
+// 	}
 
-	$.ajax(settings).done(function (response) {
-		console.log(response);
-	});
-}
-// 
-// 
-// END SEARCH - - RECOMMENDATIONS - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// 	$.ajax(settings).done(function (response) {
+// 		console.log(response);
+// 	});
+// }
+// // 
+// // 
+// // END SEARCH - - RECOMMENDATIONS - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-function clearSongResultsListEl() {
-	$('#songResultsArray').empty();
-}
+// function clearSongResultsListEl() {
+// 	$('#songResultsArray').empty();
+// }
 
 
 // console.log(songKey)
