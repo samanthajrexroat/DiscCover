@@ -1,0 +1,23 @@
+:root{
+    --bs-body-bg: #212529;
+    --bs-body-color: #0dcaf0;
+    
+
+}
+body{
+    font-family: 'Fjalla One', sans-serif;
+    background-image: linear-gradient(to bottom right, black, gray); 
+      
+}
+
+h1{
+    margin-bottom: 0px;
+}
+
+
+.artistInput {
+    height: 4rem;
+   
+
+}
+
