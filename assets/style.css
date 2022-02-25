@@ -7,17 +7,21 @@
 body{
     font-family: 'Fjalla One', sans-serif;
     background-image: linear-gradient(to bottom right, black, gray); 
-      
+    background-repeat: no-repeat;
 }
 
 h1{
     margin-bottom: 0px;
 }
 
-
 .artistInput {
     height: 4rem;
-   
-
 }
 
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
