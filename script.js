@@ -27,6 +27,23 @@ var songTitleEl = "";
 var hits = [];
 var songResultCardEl = "";
 var songKeyValue = "";
+var videoDivEl = $('#videoDiv')
+var tbodyEl = $('.tbody')
+
+searchHistory = [];
+newArray = JSON.parse(localStorage.getItem("searchHistory"));
+
+if (newArray) {
+	searchHistory = newArray;
+	for (var i = 0; i < newArray.length; i++) {
+		$("#thead").innerHTML += `
+        <tr>
+            <button id="submit" class="btn my-1 text-uppercase btn-block btn-warning">${newArray[i]}</button>
+        </tr>`;
+	}
+} else {
+	localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+}
 
 $(".btn").click(function () {
 	// preventDefault();
@@ -63,6 +80,7 @@ $(".btn").click(function () {
 		for (var h = 0; h < 5; h++) {
 			// CREATION OF CARD DIV
 			songResultCardEl = $("<div>");
+
 			songResultCardEl.addClass(
 				"card text-white btn-outline-light col-2 p-1 bg-dark rounded"
 			);
@@ -110,6 +128,7 @@ $(".btn").click(function () {
 });
 
 $(document).on("click", ".img", function () {
+	$(document).scrollTop($(document).height());
 	var songKey = $(this).attr("data-id");
 	var artistAndSong = $(this).attr("data-artistAndSong").split(" ");
 	console.log(songKey);
@@ -160,30 +179,18 @@ $(document).on("click", ".img", function () {
 		});
 });
 
-searchHistory = [];
-newArray = JSON.parse(localStorage.getItem("searchHistory"));
 
-if (newArray) {
-	searchHistory = newArray;
-	for (var i = 0; i < newArray.length; i++) {
-		$("#thead").innerHTML += `
-        <tr>
-            <button id="submit" class="btn my-1 text-uppercase btn-block btn-warning">${newArray[i]}</button>
-        </tr>`;
-	}
-} else {
-	localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
-}
+
 
 function addToList() {
-	var artistName = document.querySelector("#artistInput").value;
+	var artistName = $("#artistInput").val();
 	console.log(artistName);
-	$("#tbody").textContent += `
+	$("#thead").innerHTML +=  `
         <tr>
-            <button id="searchedArtist" class="btn my-1 text-uppercase btn-block btn-warning">${artistName}</button>
+            <button id=${artistName} class="btn my-1 text-uppercase btn-block btn-warning">${artistName}</button>
         </tr>`;
 }
-console.log(songKey);
+
 
 // START SEARCH - - RECOMMENDATIONS - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
