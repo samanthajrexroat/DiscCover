@@ -31,8 +31,16 @@ var songKeyValue = "";
 $(".btn").click(function () {
 	// preventDefault();
 	console.log(searchEl.val());
-	clearSongResultsListEl();
+	addToList();
+	var artistName = searchEl.val();
+	console.log(artistName);
 
+	array = JSON.parse(localStorage.getItem("searchHistory"));
+	console.log(array);
+
+	array.push(artistName);
+	localStorage.setItem("searchHistory", JSON.stringify(array));
+	clearSongResultsListEl();
 	// START SEARCH - - TOP TRACKS - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 	const settings = {
@@ -152,6 +160,29 @@ $(document).on("click", ".img", function () {
 		});
 });
 
+searchHistory = [];
+newArray = JSON.parse(localStorage.getItem("searchHistory"));
+
+if (newArray) {
+	searchHistory = newArray;
+	for (var i = 0; i < newArray.length; i++) {
+		$("#thead").innerHTML += `
+        <tr>
+            <button id="submit" class="btn my-1 text-uppercase btn-block btn-warning">${newArray[i]}</button>
+        </tr>`;
+	}
+} else {
+	localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+}
+
+function addToList() {
+	var artistName = document.querySelector("#artistInput").value;
+	console.log(artistName);
+	$("#tbody").textContent += `
+        <tr>
+            <button id="searchedArtist" class="btn my-1 text-uppercase btn-block btn-warning">${artistName}</button>
+        </tr>`;
+}
 console.log(songKey);
 
 // START SEARCH - - RECOMMENDATIONS - - - - - - - - - - - - - - - - - - - - - - - - - - -
