@@ -79,7 +79,7 @@ $(".btn").click(function () {
 
 			// SONG NAME
 			songName = response.tracks.hits[h].track.title;
-			artistAndSong = response.tracks.hits[h].track.share.subject;
+			artistAndSong = songName + " " + response.tracks.hits[h].track.subtitle;
 			console.log(artistAndSong);
 			var resultTitleEl = $("<h3>" + songName + "</h3>");
 			resultTitleEl.addClass("text-center card-text m-1");
@@ -103,10 +103,53 @@ $(".btn").click(function () {
 
 $(document).on("click", ".img", function () {
 	var songKey = $(this).attr("data-id");
-	var artistAndSong = $(this).attr("data-artistAndSong");
+	var artistAndSong = $(this).attr("data-artistAndSong").split(" ");
 	console.log(songKey);
 	console.log(artistAndSong);
 	// recommendedSongs(songKey)
+	// var textarea = $(".artistInput").val();
+	// console.log(textarea);
+	var fetchUrl =
+		"https://www.googleapis.com/youtube/v3/search?q=" +
+		artistAndSong +
+		"&key=AIzaSyDVmiKRoGL0qm1tR7KueDy-BCEOoOexHlk";
+	//the button grabs the value of the text area and turns it into a variable.
+	//The variable is inserted into a url string...
+	$.ajax({
+		method: "get",
+		//and an api request is made using the url string
+		url: fetchUrl,
+	})
+		.then(function (response) {
+			console.log(fetchUrl);
+			console.log(response);
+			console.log(response.items[0].id.videoId);
+			var videoId = response.items[0].id.videoId;
+
+			return videoId;
+		})
+		.then(function (videoId) {
+			var videoEmbedLink = "https://www.youtube.com/embed/" + videoId;
+			console.log(videoEmbedLink);
+			$("iframe").attr("src", videoEmbedLink);
+			// var embedVideo = $("<iframe>");
+			// embedVideo.attr("width", "560");
+			// embedVideo.attr("height", "315");
+			// embedVideo.attr("src", videoEmbedLink);
+			// embedVideo.attr("title", "Artist Video");
+			// embedVideo.attr("frameborder", "0");
+			// embedVideo.attr(
+			// 	"allow",
+			// 	"alutoplay; clipboard-write; gyroscope; picture in picture; "
+			// );
+			// embedVideo.attr("autoplay");
+			// embedVideo.attr("clipboard-write");
+
+			// embedVideo.attr("gyroscope");
+			// embedVideo.attr("picture-in-picture");
+			// embedVideo.attr("allowfullscreen");
+			// embedVideo.append($("#video-player"));
+		});
 });
 
 console.log(songKey);
@@ -137,9 +180,6 @@ console.log(songKey);
 // //
 // // END SEARCH - - RECOMMENDATIONS - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-// function clearSongResultsListEl() {
-// 	$('#songResultsArray').empty();
-// }
-
-// console.log(songKey)
-// })
+function clearSongResultsListEl() {
+	$("#songResultsArray").empty();
+}
