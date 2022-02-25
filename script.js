@@ -22,7 +22,7 @@
 	var hits = [];
 	var songResultCardEl = ""
 
-	$(searchEl).keyup(function (event) {
+	$(searchEl).keydown(function (event) {
 		if (event.which == 13){
 			event.preventDefault();
 			$(submitBtnEl).click();
@@ -38,7 +38,20 @@
 
 
 		// START SEARCH - - TOP TRACKS - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+		// const settings = {
+		// 	"async": true,
+		// 	"crossDomain": true,
+		// 	"url": "https://shazam.p.rapidapi.com/search?term=kiss%20the%20rain&locale=en-US&offset=0&limit=5",
+		// 	"method": "GET",
+		// 	"headers": {
+		// 		"x-rapidapi-host": "shazam.p.rapidapi.com",
+		// 		"x-rapidapi-key": "73d6d75d06msh06ffbbcaf1a0c6fp1b3bdfjsn8b865196affb"
+		// 	}
+		// };
+		
+		// $.ajax(settings).done(function (response) {
+		// 	console.log(response);
+		
 
 		const settings = {
 			"async": true,
@@ -47,7 +60,7 @@
 			"method": "GET",
 			"headers": {
 				"x-rapidapi-host": "shazam.p.rapidapi.com",
-				"x-rapidapi-key": "461cbd2219msh0060281615c946dp11914fjsnbde57ac7e810"
+				"x-rapidapi-key": "73d6d75d06msh06ffbbcaf1a0c6fp1b3bdfjsn8b865196affb"
 			}
 		}
 
