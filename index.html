@@ -37,15 +37,17 @@
             </div>
         </div>
 
-        <div class="row">
-            <table class="table table-borderless">
-              <thead id="tbody">
-                
-                  <!-- LOCAL STORAGE BUTTONS POPULATE HERE - - - - - - - - - - - - --> 
-                
-              </thead>
-            </table>
+        <div class="d-flex row justify-content-center ">
+            <div class="d-flex col-10 justify-content-center" id="tbody">
+
+            </div>
         </div>
+
+        <!-- <div class="row" id="artistHeader">
+            <div class="col-12 d-flex justify-content-center">
+                <h2 class="artistName"></h2>
+            </div>
+        </div> -->
 
         <div class=" d-flex row justify-content-center">
             <div class="d-flex row">
@@ -57,8 +59,27 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row justify-content-center bg-dark w-100">
+
+    <div class="container-fluid hide" id="videoDiv">
+        <div class="d-flex row justify-content-center">
+            <div class="d-flex col-6 mt-4 justify-content-center responsive-embed widescreen">
+                <iframe src="https://www.youtube.com/embed/aKydtOXW8mI"
+                        class="justify-content-center"
+                        width="560"  height="349"
+                        loading="lazy"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write;
+                                encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <div class="container-fluid" id="carouselDiv">
+        <div class="row justify-content-center w-100">
             <div class="col-10 m-5">
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">

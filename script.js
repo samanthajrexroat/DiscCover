@@ -18,6 +18,7 @@ var apiKey = "73d6d75d06msh06ffbbcaf1a0c6fp1b3bdfjsn8b865196affb";
 
 var submitBtnEl = document.querySelector(".btn");
 
+
 // jQuery code is in here
 var artist = $("#artistInput");
 var songName = "";
@@ -27,45 +28,83 @@ var songTitleEl = "";
 var hits = [];
 var songResultCardEl = "";
 var songKeyValue = "";
-var videoDivEl = $('#videoDiv')
-var tbodyEl = $('.tbody')
+var videoDivEl = $("#videoDiv");
 
-searchHistory = [];
-newArray = JSON.parse(localStorage.getItem("searchHistory"));
 
-if (newArray) {
+function addButton(){
+	clearSongResultsListEl();
+	var searchHistory = [];
+	var newArray = JSON.parse(localStorage.getItem("searchHistory") || "[]");	
 	searchHistory = newArray;
-	for (var i = 0; i < newArray.length; i++) {
-		$("#thead").innerHTML += `
-        <tr>
-            <button id="submit" class="btn my-1 text-uppercase btn-block btn-warning">${newArray[i]}</button>
-        </tr>`;
+	var buttons = []
+	var tbody = $("#tbody")
+	tbody.empty();
+	for (var i = 0; i < searchHistory.length; i++) {
+		console.log(searchHistory[i]);
+		console.log(buttons);
+		if (buttons.includes(searchHistory[i])){
+			break
+		}else{
+			var button = `<button id="${i}" class="p-3" value="${searchHistory[i]}">${searchHistory[i]}</button>`
+			tbody.append(button);
+			$(`#${i}`).click(function(event){
+				console.log(event.target);
+				console.log(event.currentTarget.textContent)
+				var search = event.currentTarget.textContent;
+				searchArtist(search);
+			});
+			buttons.push(searchHistory[i]);
+		}
+		
+	
+
+		// $("#thead").innerHTML += `
+        // <tr>
+        //     <button id="submit" class="btn my-1 text-uppercase btn-block btn-warning">${newArray[i]}</button>
+        // </tr>`;
 	}
-} else {
-	localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+	
 }
+
+	addButton();
+
+
+// When return key is pressed, search button clicks.
+$(searchEl).keydown(function (event) {
+	if (event.which == 13){
+		event.preventDefault();
+		$(submitBtnEl).click();
+	}else{
+		return
+	}
+})
 
 $(".btn").click(function () {
 	// preventDefault();
+	
 	console.log(searchEl.val());
-	addToList();
-	var artistName = searchEl.val();
-	console.log(artistName);
-
-	array = JSON.parse(localStorage.getItem("searchHistory"));
+	clearSongResultsListEl();
+	searchArtist();
+	array = JSON.parse(localStorage.getItem("searchHistory")|| "[]" ) 
 	console.log(array);
 
-	array.push(artistName);
+	array.push(searchEl.val());
 	localStorage.setItem("searchHistory", JSON.stringify(array));
-	clearSongResultsListEl();
+	addButton(searchEl.val());
 	// START SEARCH - - TOP TRACKS - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	
+});
 
+function searchArtist (search) {
+	clearSongResultsListEl();
+	console.log(search);
+	var query = search || searchEl.val();
 	const settings = {
 		async: true,
 		crossDomain: true,
 		url:
 			"https://shazam.p.rapidapi.com/search?term=" +
-			searchEl.val() +
+			query +
 			"&locale=en-US&offset=0&limit=5",
 		method: "GET",
 		headers: {
@@ -82,7 +121,7 @@ $(".btn").click(function () {
 			songResultCardEl = $("<div>");
 
 			songResultCardEl.addClass(
-				"card text-white btn-outline-light col-2 p-1 bg-dark rounded"
+				"card text-white btn-outline-light col-2 p-1 m-2 bg-dark rounded"
 			);
 
 			// HOVER ELEMENT FOR CAR DIV
@@ -100,6 +139,7 @@ $(".btn").click(function () {
 			// COVER ART AT TOP OF CARD
 			var coverArt = $("<img>");
 			coverArt.attr("src", response.tracks.hits[h].track.images.coverart);
+			coverArt.attr("href", videoDivEl);
 			coverArt.addClass("img coverArt");
 			coverArt.appendTo(songResultCardEl);
 
@@ -125,9 +165,11 @@ $(".btn").click(function () {
 			// var test = element.
 		}
 	});
-});
+}
 
 $(document).on("click", ".img", function () {
+	videoDivEl.removeClass("hide");
+	videoDivEl.addClass("show");
 	$(document).scrollTop($(document).height());
 	var songKey = $(this).attr("data-id");
 	var artistAndSong = $(this).attr("data-artistAndSong").split(" ");
@@ -177,20 +219,12 @@ $(document).on("click", ".img", function () {
 			// embedVideo.attr("allowfullscreen");
 			// embedVideo.append($("#video-player"));
 		});
+	
+
+	
 });
 
-
-
-
-function addToList() {
-	var artistName = $("#artistInput").val();
-	console.log(artistName);
-	$("#thead").innerHTML +=  `
-        <tr>
-            <button id=${artistName} class="btn my-1 text-uppercase btn-block btn-warning">${artistName}</button>
-        </tr>`;
-}
-
+console.log(songKey);
 
 // START SEARCH - - RECOMMENDATIONS - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
