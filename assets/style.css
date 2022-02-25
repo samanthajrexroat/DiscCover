@@ -10,6 +10,10 @@ body{
     background-repeat: no-repeat;
 }
 
+button{
+    
+}
+
 h1{
     margin-bottom: 0px;
 }
@@ -24,4 +28,8 @@ h1{
 
 .show {
     display: block;
+}
+
+#tbody {
+    display: inline;
 }

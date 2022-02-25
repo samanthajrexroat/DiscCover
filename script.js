@@ -30,6 +30,45 @@ var songResultCardEl = "";
 var songKeyValue = "";
 var videoDivEl = $("#videoDiv");
 
+
+function addButton(){
+	clearSongResultsListEl();
+	var searchHistory = [];
+	var newArray = JSON.parse(localStorage.getItem("searchHistory") || "[]");	
+	searchHistory = newArray;
+	var buttons = []
+	var tbody = $("#tbody")
+	tbody.empty();
+	for (var i = 0; i < searchHistory.length; i++) {
+		console.log(searchHistory[i]);
+		console.log(buttons);
+		if (buttons.includes(searchHistory[i])){
+			break
+		}else{
+			var button = `<button id="${i}" class="p-3" value="${searchHistory[i]}">${searchHistory[i]}</button>`
+			tbody.append(button);
+			$(`#${i}`).click(function(event){
+				console.log(event.target);
+				console.log(event.currentTarget.textContent)
+				var search = event.currentTarget.textContent;
+				searchArtist(search);
+			});
+			buttons.push(searchHistory[i]);
+		}
+		
+	
+
+		// $("#thead").innerHTML += `
+        // <tr>
+        //     <button id="submit" class="btn my-1 text-uppercase btn-block btn-warning">${newArray[i]}</button>
+        // </tr>`;
+	}
+	
+}
+
+	addButton();
+
+
 // When return key is pressed, search button clicks.
 $(searchEl).keydown(function (event) {
 	if (event.which == 13){
@@ -42,25 +81,30 @@ $(searchEl).keydown(function (event) {
 
 $(".btn").click(function () {
 	// preventDefault();
+	
 	console.log(searchEl.val());
-	addToList();
-	var artistName = searchEl.val();
-	console.log(artistName);
-
-	array = JSON.parse(localStorage.getItem("searchHistory"));
+	clearSongResultsListEl();
+	searchArtist();
+	array = JSON.parse(localStorage.getItem("searchHistory")|| "[]" ) 
 	console.log(array);
 
-	array.push(artistName);
+	array.push(searchEl.val());
 	localStorage.setItem("searchHistory", JSON.stringify(array));
-	clearSongResultsListEl();
+	addButton(searchEl.val());
 	// START SEARCH - - TOP TRACKS - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	
+});
 
+function searchArtist (search) {
+	clearSongResultsListEl();
+	console.log(search);
+	var query = search || searchEl.val();
 	const settings = {
 		async: true,
 		crossDomain: true,
 		url:
 			"https://shazam.p.rapidapi.com/search?term=" +
-			searchEl.val() +
+			query +
 			"&locale=en-US&offset=0&limit=5",
 		method: "GET",
 		headers: {
@@ -120,7 +164,7 @@ $(".btn").click(function () {
 			// var test = element.
 		}
 	});
-});
+}
 
 $(document).on("click", ".img", function () {
 	videoDivEl.removeClass("hide");
@@ -179,29 +223,6 @@ $(document).on("click", ".img", function () {
 	
 });
 
-searchHistory = [];
-newArray = JSON.parse(localStorage.getItem("searchHistory"));
-
-if (newArray) {
-	searchHistory = newArray;
-	for (var i = 0; i < newArray.length; i++) {
-		$("#thead").innerHTML += `
-        <tr>
-            <button id="submit" class="btn my-1 text-uppercase btn-block btn-warning">${newArray[i]}</button>
-        </tr>`;
-	}
-} else {
-	localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
-}
-
-function addToList() {
-	var artistName = document.querySelector("#artistInput").value;
-	console.log(artistName);
-	$("#tbody").textContent += `
-        <tr>
-            <button id="searchedArtist" class="btn my-1 text-uppercase btn-block btn-warning">${artistName}</button>
-        </tr>`;
-}
 console.log(songKey);
 
 // START SEARCH - - RECOMMENDATIONS - - - - - - - - - - - - - - - - - - - - - - - - - - -
