@@ -45,7 +45,7 @@ function addButton(){
 		if (buttons.includes(searchHistory[i])){
 			break
 		}else{
-			var button = `<button id="${i}" class="p-3" value="${searchHistory[i]}">${searchHistory[i]}</button>`
+			var button = `<button id="${i}" class="text-capitalization m-3 p-3 rounded" value="${searchHistory[i]}">${searchHistory[i]}</button>`
 			tbody.append(button);
 			$(`#${i}`).click(function(event){
 				console.log(event.target);
@@ -116,11 +116,11 @@ function searchArtist (search) {
 	$.ajax(settings).then(function (response) {
 		console.log(response);
 
-		for (var h = 0; h < 5; h++) {
+		for (var h = 0; h < 6; h++) {
 			// CREATION OF CARD DIV
 			songResultCardEl = $("<div>");
 			songResultCardEl.addClass(
-				"card text-white btn-outline-light col-2 p-1 m-2 bg-dark rounded"
+				"card d-flex text-white btn-outline-light col-6 col-sm-4 col-md-3 col-lg-2 p-1 m-2 bg-dark rounded"
 			);
 
 			// HOVER ELEMENT FOR CAR DIV
