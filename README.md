@@ -23,8 +23,8 @@ New goal: Find artist and 5 most played songs. (In Shazam)
 
 ### Links
 
-![GitHub Repository]"https://github.com/samanthajrexroat/DiscCover.git"
+[GitHub Repository](https://github.com/samanthajrexroat/DiscCover.git)
 
-Deployed Live https://samanthajrexroat.github.io/DiscCover/
+[Deployed Live](https://samanthajrexroat.github.io/DiscCover/)
 
-Pages Presentation https://docs.google.com/presentation/d/1FOBTQ1ZcLnq3jsC9K9ltrJ7KiRGoNhmKUsfT3JjSF8I/edit?usp=sharing
+[Pages Presentation](https://docs.google.com/presentation/d/1FOBTQ1ZcLnq3jsC9K9ltrJ7KiRGoNhmKUsfT3JjSF8I/edit?usp=sharing)
