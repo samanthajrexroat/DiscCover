@@ -1,12 +1,21 @@
 :root{
-    --bs-body-bg: #212529;
+    --bs-body-bg: black;
     --bs-body-color: #0dcaf0;
     
 
 }
+html{
+    min-height: 100%;
+    position: relative;
+}
+
+
 body{
+    height: 100%;
+    width: 100%;
     font-family: 'Fjalla One', sans-serif;
-    background-image: linear-gradient(to bottom right, black, gray); 
+    background-size: cover;
+    background-image: linear-gradient(black, gray, black); 
     background-repeat: no-repeat;
 }
 
