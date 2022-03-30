@@ -1,5 +1,5 @@
 ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
-# Pantry Chef
+# DiscCover Music
 
 ## Description
 An application that allows users to type in a musical artist and
