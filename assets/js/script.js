@@ -1,19 +1,28 @@
-// DO NOT DELETE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//
-// API Key: 461cbd2219msh0060281615c946dp11914fjsnbde57ac7e810
-//
-// DO NOT DELETE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// encryption via MetaTron on stackoverflow, can be found here: https://stackoverflow.com/a/66938952
+const crypt = (salt, text) => {
+	const textToChars = (text) => text.split("").map((c) => c.charCodeAt(0));
+	const byteHex = (n) => ("0" + Number(n).toString(16)).substr(-2);
+	const applySaltToChar = (code) => textToChars(salt).reduce((a, b) => a ^ b, code);
 
-// DO NOT DELETE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//
-// API Key: 73d6d75d06msh06ffbbcaf1a0c6fp1b3bdfjsn8b865196affb
-//
-// DO NOT DELETE - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	return text.split("").map(textToChars).map(applySaltToChar).map(byteHex).join("");
+};
+
+const decrypt = (salt, encoded) => {
+	const textToChars = (text) => text.split("").map((c) => c.charCodeAt(0));
+	const applySaltToChar = (code) => textToChars(salt).reduce((a, b) => a ^ b, code);
+	return encoded
+		.match(/.{1,2}/g)
+		.map((hex) => parseInt(hex, 16))
+		.map(applySaltToChar)
+		.map((charCode) => String.fromCharCode(charCode))
+		.join("");
+};
 
 var searchEl = $("#artistInput");
-var apiKey = "73d6d75d06msh06ffbbcaf1a0c6fp1b3bdfjsn8b865196affb";
+var apiKey = decrypt("salt", "3d396e3c6e3d3f6e3a3c6779623a3c6c6c6868696b6c3b6b3a693c6c7a3b6839686e6c6079643268323c3f3b333c6b6c6c68");
 var videoDivEl = $("#videoDiv");
 let recentSearchArr = JSON.parse(localStorage.getItem("searchHistory") || "[]");
+const ytAPIKey = decrypt("salt", "4b43706b59734e4648555d3f4c70734b5f5f5b3e7c61426b61603f3a503c4c4e5d6b5c7f616b61");
 
 function addButton(value) {
 	if (value == "" || null) {
@@ -59,7 +68,7 @@ function searchArtist(search) {
 		method: "GET",
 		headers: {
 			"x-rapidapi-host": "shazam.p.rapidapi.com",
-			"x-rapidapi-key": "73d6d75d06msh06ffbbcaf1a0c6fp1b3bdfjsn8b865196affb",
+			"x-rapidapi-key": apiKey,
 		},
 	};
 
@@ -112,7 +121,7 @@ $(document).on("click", ".img", function () {
 	$(document).scrollTop($(document).height());
 	var artistAndSong = $(this).attr("data-artistAndSong").split(" ");
 
-	var fetchUrl = "https://www.googleapis.com/youtube/v3/search?q=" + artistAndSong + "&key=AIzaSyDLB_W5FzyAUUQ4vkHakj50Z6FDWaVukak";
+	var fetchUrl = "https://www.googleapis.com/youtube/v3/search?q=" + artistAndSong + "&key=" + ytAPIKey;
 	//the button grabs the value of the text area and turns it into a variable.
 	//The variable is inserted into a url string...
 	$.ajax({
